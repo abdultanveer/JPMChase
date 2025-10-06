@@ -1,6 +1,7 @@
 package com.example.jpmchase
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -29,6 +30,8 @@ import androidx.compose.ui.unit.dp
 import com.example.jpmchase.ui.theme.JPMChaseTheme
 
 class DiceRollerActivity : ComponentActivity() {
+    var TAG = DiceRollerActivity::class.java.simpleName
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -47,23 +50,32 @@ class DiceRollerActivity : ComponentActivity() {
 
     override fun onStart() {  //visible
         super.onStart()
-        throw NullPointerException("crash demo")
+        //throw NullPointerException("crash demo")
+        Log.i(TAG,"starting/visble - hatching egg")
     }
 
     override fun onResume() {
         super.onResume()
+        Log.e(TAG,"visible - waking")
+
     }
 
     override fun onPause() {
         super.onPause()
+        Log.w(TAG,"background - sleep")
+
     }
 
     override fun onStop() {
         super.onStop()
+        Log.v(TAG," - hibernating")
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        Log.d(TAG," - purge")
+
     }
 }
 
