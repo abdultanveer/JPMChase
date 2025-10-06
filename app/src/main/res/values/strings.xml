@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">JPMChase</string>
     <string name="message">Android</string>
+    <string name="roll">Roll</string>
+
     <string name="from">abdul</string>
+    <string name="title_activity_dice_roller">DiceRollerActivity</string>
 </resources>
