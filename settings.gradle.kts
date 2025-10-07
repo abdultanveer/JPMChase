@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "JPMChase"
 include(":app")
+include(":app:lib")
