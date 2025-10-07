@@ -21,12 +21,12 @@ class ArcActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[ArcViewModel::class.java]
 
         counterTextView = findViewById(R.id.textViewcounter)
+
         counterTextView.setText(""+viewModel.counter)
     }
 
     fun handleClicks(view: View) {
-        viewModel.incrementCount()
-
-        counterTextView.setText(""+viewModel.counter)
+       viewModel.startTimer()
+        counterTextView.setText(""+viewModel._seconds)
     }
 }
