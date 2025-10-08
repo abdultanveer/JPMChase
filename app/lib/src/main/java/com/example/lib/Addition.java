@@ -7,6 +7,7 @@ public class Addition {
 
     public void aritraAdd(int a, int b,MobilePhone phno){
         try {
+            System.out.println("fetching the data from server");
             Thread.sleep(10000);
           phno.onAddition(a+b);
         } catch (InterruptedException e) {

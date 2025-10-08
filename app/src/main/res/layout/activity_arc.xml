@@ -19,12 +19,34 @@
 
     <Button
         android:id="@+id/button"
-        android:onClick="handleClicks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="71dp"
         android:layout_marginEnd="147dp"
+        android:onClick="handleClicks"
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="27dp"
+        android:onClick="startDialer"
+        android:text="dialer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewcounter" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="43dp"
+        android:onClick="startDiceRolling"
+        android:text="diceroller"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

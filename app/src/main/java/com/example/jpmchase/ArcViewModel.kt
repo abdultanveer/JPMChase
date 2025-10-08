@@ -4,6 +4,9 @@ import android.os.CountDownTimer
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ArcViewModel:ViewModel() {
     var TAG = ArcViewModel::class.java.simpleName
@@ -14,6 +17,9 @@ class ArcViewModel:ViewModel() {
     //i madde seconds as observable
 
     fun incrementCount() {
+//        viewModelScope.launch {
+//            ///call a suspendable fun
+//        }
         counter++
     }
 

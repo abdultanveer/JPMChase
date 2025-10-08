@@ -35,12 +35,15 @@ class DiceRollerActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        var  receivedData = intent.extras?.getString("jpmkey")
         setContent {
             JPMChaseTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    DiceWithButtonAndImage(modifier = Modifier
-                        .fillMaxSize()
-                        .wrapContentSize(Alignment.Center)
+                    DiceWithButtonAndImage(
+                      data = receivedData!!,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .wrapContentSize(Alignment.Center)
 
                     )
                 }
@@ -82,7 +85,7 @@ class DiceRollerActivity : ComponentActivity() {
 
 
 @Composable
-fun DiceWithButtonAndImage(modifier: Modifier = Modifier) {
+fun DiceWithButtonAndImage(modifier: Modifier = Modifier,data:String) {
     var result by remember { mutableStateOf(1) }
 //remember -- remeber the values after recomposition
     //state = observable data
@@ -99,6 +102,7 @@ fun DiceWithButtonAndImage(modifier: Modifier = Modifier) {
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Text(text = data)
         Image(
             painter = painterResource(imageResource),
             contentDescription = result.toString()
@@ -115,6 +119,6 @@ fun DiceWithButtonAndImage(modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview2() {
     JPMChaseTheme {
-        DiceWithButtonAndImage()
+       // DiceWithButtonAndImage()
     }
 }
