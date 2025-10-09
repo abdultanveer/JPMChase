@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -18,7 +19,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
@@ -36,7 +39,7 @@ class SideEffectsActivity : ComponentActivity() {
         setContent {
             JPMChaseTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                  Counters()
+                    DerivedState()
                 }
             }
         }
@@ -45,17 +48,45 @@ class SideEffectsActivity : ComponentActivity() {
 
 
 @Composable
-fun Counters(){
-    val state =  remember {
-        mutableStateOf(0)
+fun DerivedState(){
+    val tableof = remember {
+        mutableStateOf(5)
     }
-
-    LaunchedEffect(Unit) {
-        for (i in 1..10){
+    val index = produceState(initialValue = 0, ) {
+        repeat(9){
             delay(1000)
-            state.value++
+            value +=1
         }
     }
+//derived state ie message updates/recomposes when the source state ie  index changes/updates
+    val  message = remember {
+        derivedStateOf {
+            "${tableof.value} * ${index.value}  = ${tableof.value * index.value}"
+        }
+    }
+
+    Box {
+        Text(text = message.value)
+    }
+
+
+}
+
+@Composable
+fun Counters(){
+    val state = produceState(initialValue = 0) {
+        for (i in 1..10){
+            delay(1000)
+            value++
+        }
+    }
+//        remember {
+//        mutableStateOf(0)
+//    }
+//
+//    LaunchedEffect(Unit) {
+//
+//    }
     Text(text = state.value.toString(),
         style = MaterialTheme.typography.bodySmall)
 }
