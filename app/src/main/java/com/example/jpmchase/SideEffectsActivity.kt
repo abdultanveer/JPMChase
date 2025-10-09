@@ -1,5 +1,6 @@
 package com.example.jpmchase
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -14,12 +15,14 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jpmchase.ui.theme.JPMChaseTheme
 import kotlinx.coroutines.delay
@@ -32,12 +35,40 @@ class SideEffectsActivity : ComponentActivity() {
         setContent {
             JPMChaseTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                   App()
+                   MyMediaPlayerApp()
                 }
             }
         }
     }
 }
+
+@Composable
+fun MyMediaPlayerApp(){
+    var state = remember { mutableStateOf(false) }
+val context = LocalContext.current
+    DisposableEffect(Unit) {
+
+   val mediaPlayer  = MediaPlayer.create(context,R.raw.music)
+        mediaPlayer.start()
+        Log.i("Dispose","started")
+        onDispose {
+        mediaPlayer.stop()
+            mediaPlayer.release()
+            Log.i("Dispose","cleaning up- releasing resources")
+        }
+
+    }
+
+    Button(onClick = { state.value = !state.value }) {
+        Text(text = "change state")
+    }
+}
+
+
+
+
+
+
 
 @Composable
 fun App(){
