@@ -18,6 +18,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jpmchase.ui.theme.JPMChaseTheme
@@ -53,9 +54,13 @@ fun App(){
 
 @Composable
 fun Counter(value:Int){
-    LaunchedEffect(key1 = Unit) {
+    val state = rememberUpdatedState(newValue = value)
+    LaunchedEffect(key1 = state) {
+        //LE runs in  initial composition / when the key changes
+        //LE will not launch on recomposition
+        Log.d("2nd  effect","2nd effect started--value --"+state.toString())
         delay(5000)
-        Log.i("updated","updated state ="+value.toString())
+        Log.i("updated","updated state ="+state.toString())
     }
     Text(text =value.toString() )
 }
