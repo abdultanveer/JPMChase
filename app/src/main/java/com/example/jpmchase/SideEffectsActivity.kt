@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,12 +36,32 @@ class SideEffectsActivity : ComponentActivity() {
         setContent {
             JPMChaseTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                   MyMediaPlayerApp()
+                  Counters()
                 }
             }
         }
     }
 }
+
+
+@Composable
+fun Counters(){
+    val state =  remember {
+        mutableStateOf(0)
+    }
+
+    LaunchedEffect(Unit) {
+        for (i in 1..10){
+            delay(1000)
+            state.value++
+        }
+    }
+    Text(text = state.value.toString(),
+        style = MaterialTheme.typography.bodySmall)
+}
+
+
+
 
 @Composable
 fun MyMediaPlayerApp(){
