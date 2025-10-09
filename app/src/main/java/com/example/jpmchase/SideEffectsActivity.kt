@@ -1,6 +1,7 @@
 package com.example.jpmchase
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,10 +27,29 @@ class SideEffectsActivity : ComponentActivity() {
         setContent {
             JPMChaseTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    ListComposable()
+                   Counter()
                 }
             }
         }
+    }
+}
+
+@Composable
+fun Counter(){
+    var count = remember {
+
+        mutableStateOf(0)
+    }
+
+    var mkey = count.value  %3 == 0
+
+    LaunchedEffect(key1 = mkey) {
+        Log.i("Counter", "count value ="+ count.value)
+    }
+
+
+    Button(onClick = { count.value++ }) {
+        Text(text = "Increment")
     }
 }
 
