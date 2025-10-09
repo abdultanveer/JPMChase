@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -16,9 +17,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jpmchase.ui.theme.JPMChaseTheme
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SideEffectsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,10 +31,40 @@ class SideEffectsActivity : ComponentActivity() {
         setContent {
             JPMChaseTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                   Counter()
+                    CoroutineScopeComposable()
                 }
             }
         }
+    }
+}
+
+@Composable
+fun CoroutineScopeComposable(){
+    var countr = remember {
+        mutableStateOf(0)
+    }
+    var scope = rememberCoroutineScope()
+    var text =   "counter is running ${countr.value}"
+    if(countr.value == 10){
+        text =  "counter stopped"
+    }
+    Column {
+        Text(text = text)
+
+        Button(onClick = {
+           scope.launch {
+               Log.i("coroutine composable","started")
+               for (i in  1..10){
+                   countr.value++
+                   delay(1000)
+           }
+           }
+
+        }) {
+            Text(text = "start")
+        }
+
+
     }
 }
 
@@ -44,11 +78,14 @@ fun Counter(){
     var mkey = count.value  %3 == 0
 
     LaunchedEffect(key1 = mkey) {
+        //fetchingData()
         Log.i("Counter", "count value ="+ count.value)
     }
 
 
-    Button(onClick = { count.value++ }) {
+    Button(onClick = {
+        count.value++
+    }) {
         Text(text = "Increment")
     }
 }
