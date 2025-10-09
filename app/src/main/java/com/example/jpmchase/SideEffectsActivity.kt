@@ -31,11 +31,33 @@ class SideEffectsActivity : ComponentActivity() {
         setContent {
             JPMChaseTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    CoroutineScopeComposable()
+                   App()
                 }
             }
         }
     }
+}
+
+@Composable
+fun App(){
+    var timer = remember {
+        mutableStateOf(0)
+    }
+    LaunchedEffect(key1 = Unit) {
+        delay(2000)
+        timer.value = 10
+    }
+    Counter(timer.value)
+
+}
+
+@Composable
+fun Counter(value:Int){
+    LaunchedEffect(key1 = Unit) {
+        delay(5000)
+        Log.i("updated","updated state ="+value.toString())
+    }
+    Text(text =value.toString() )
 }
 
 @Composable
