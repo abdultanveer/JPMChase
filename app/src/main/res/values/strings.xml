@@ -5,4 +5,5 @@
 
     <string name="from">abdul</string>
     <string name="title_activity_dice_roller">DiceRollerActivity</string>
+    <string name="title_activity_side_effects">SideEffectsActivity</string>
 </resources>

@@ -13,9 +13,9 @@
         android:theme="@style/Theme.JPMChase"
         tools:targetApi="31">
         <activity
-            android:name=".DiceRollerActivity"
+            android:name=".SideEffectsActivity"
             android:exported="true"
-            android:label="@string/title_activity_dice_roller"
+            android:label="@string/title_activity_side_effects"
             android:theme="@style/Theme.JPMChase">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,12 +24,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".DiceRollerActivity"
             android:exported="true"
-            android:label="@string/app_name"
+            android:label="@string/title_activity_dice_roller"
             android:theme="@style/Theme.JPMChase">
 
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.JPMChase"></activity>
     </application>
 
 </manifest>
