@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.jpmchase.di.FirebaseQualifier
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import javax.inject.Named
@@ -21,7 +22,7 @@ class MainFragment : Fragment() {
     //when userrepo obj is required, hilt will search in constructor,
     //search for fragmentComponent -- ActivityComponent--SingletonComponent
     @Inject
-    @Named("firebase")
+    @FirebaseQualifier
     lateinit var userRepository: UserRepository
 
     override fun onCreateView(

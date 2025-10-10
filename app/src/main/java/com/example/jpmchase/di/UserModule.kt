@@ -14,7 +14,7 @@ import javax.inject.Named
 class UserModule {
 
     @Provides
-    @Named("firebase")
+    @FirebaseQualifier
     fun providesFirebaseRepository():UserRepository{
         return FirebaseRepository()
     }
