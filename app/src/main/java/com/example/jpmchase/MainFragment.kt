@@ -16,6 +16,9 @@ private const val ARG_PARAM2 = "param2"
 @AndroidEntryPoint
 class MainFragment : Fragment() {
 
+
+    //when userrepo obj is required, hilt will search in constructor,
+    //search for fragmentComponent -- ActivityComponent--SingletonComponent
     @Inject
     lateinit var userRepository: UserRepository
 
