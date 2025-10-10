@@ -3,20 +3,25 @@ package com.example.jpmchase.di
 import com.example.jpmchase.FirebaseRepository
 import com.example.jpmchase.SqlRepository
 import com.example.jpmchase.UserRepository
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.FragmentComponent
-//for classes present in other libraries to which you cant add @inject besides the constructor
-@InstallIn(FragmentComponent::class)
-@Module
-abstract class UserModule {
+import dagger.hilt.android.components.ActivityComponent
+import javax.inject.Named
 
-//    @Provides
-//    fun providesUserRepository(sqlRepository: SqlRepository):UserRepository{
-//        return sqlRepository
-//    }
-    @Binds
-abstract  fun providesUserRepository(sqlRepository: SqlRepository):UserRepository
+@InstallIn(ActivityComponent::class)
+@Module
+class UserModule {
+
+    @Provides
+    @Named("firebase")
+    fun providesFirebaseRepository():UserRepository{
+        return FirebaseRepository()
+    }
+
+    @Named("sql")
+    @Provides
+    fun providesSqlRepository():UserRepository{
+        return SqlRepository()
+    }
 }

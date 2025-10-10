@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import javax.inject.Named
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +21,7 @@ class MainFragment : Fragment() {
     //when userrepo obj is required, hilt will search in constructor,
     //search for fragmentComponent -- ActivityComponent--SingletonComponent
     @Inject
+    @Named("firebase")
     lateinit var userRepository: UserRepository
 
     override fun onCreateView(
