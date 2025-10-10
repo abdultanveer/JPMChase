@@ -16,15 +16,15 @@ private const val ARG_PARAM2 = "param2"
 @AndroidEntryPoint
 class MainFragment : Fragment() {
 
-//    @Inject
-//    lateinit var userRepository: UserRepository
+    @Inject
+    lateinit var userRepository: UserRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-       // userRepository.saveUser("abdul@mail.com","1234")
+       userRepository.saveUser("abdul@mail.com","1234")
 
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
